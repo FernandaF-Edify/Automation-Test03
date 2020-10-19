@@ -1,0 +1,284 @@
+{
+	"info": {
+		"_postman_id": "663b066b-cb8a-42a1-bdb9-1e8a526f152e",
+		"name": "APITesting",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "StatusValidation(Test 01)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "92e8d422-ebaf-4031-9b6d-6932a6bc0880",
+						"exec": [
+							"pm.test(\"Status should include examen\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"Listos para el examen\");",
+							"});",
+							"",
+							"pm.test(\"Successful GET request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200]);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api-coffee-testing.herokuapp.com/v1/examen/status",
+					"protocol": "https",
+					"host": [
+						"api-coffee-testing",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"v1",
+						"examen",
+						"status"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PutNameWithoutBody(Test02)",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "e6bf444c-5126-4115-8255-0988e20bb2e4",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "18fd19a7-b941-42ad-9648-9b5be20650c0",
+						"exec": [
+							"pm.test(\"Name wasn't describe in the body\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"Name was not provided\");",
+							"});",
+							"",
+							"pm.test(\"Successful PUT request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([406]);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api-coffee-testing.herokuapp.com/v1/examen/updateName",
+					"protocol": "https",
+					"host": [
+						"api-coffee-testing",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"v1",
+						"examen",
+						"updateName"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "RandomNameWithoutAuth(Test03)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "bb7550ce-46d0-40fb-b95a-66fba5c44a1b",
+						"exec": [
+							"pm.test(\"Login error message\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"Please login first\");",
+							"});",
+							"",
+							"pm.test(\"Successful GET request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([401]);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api-coffee-testing.herokuapp.com/v1/examen/randomName",
+					"protocol": "https",
+					"host": [
+						"api-coffee-testing",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"v1",
+						"examen",
+						"randomName"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "RandomUserValidation(Test04)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "0daab856-bc51-480f-8210-ac87272e82f9",
+						"exec": [
+							"var data = pm.response.json();",
+							"pm.globals.set(\"randomUserName\", data.name);",
+							"console.log(pm.variables.get(\"randomUserName\"))",
+							"",
+							"pm.test(\"Successful GET request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200]);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "testpass",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "testuser",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api-coffee-testing.herokuapp.com/v1/examen/randomName",
+					"protocol": "https",
+					"host": [
+						"api-coffee-testing",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"v1",
+						"examen",
+						"randomName"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SearchSameUser(Test04)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "133d077e-c13d-463b-8976-e9ecdb769641",
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([406]);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "0eff18eb-5b57-4f55-ae7b-43ab02fdaaac",
+						"exec": [
+							"console.log(pm.variables.get(\"randomUserName\"))",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": {{randomUserName}}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api-coffee-testing.herokuapp.com/v1/examen/sameName",
+					"protocol": "https",
+					"host": [
+						"api-coffee-testing",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"v1",
+						"examen",
+						"sameName"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
