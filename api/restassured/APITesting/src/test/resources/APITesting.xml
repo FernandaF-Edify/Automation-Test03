@@ -2,7 +2,6 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
 <suite name="Rest Assuranced" parallel="tests" thread-count="3">
-    <parameter name="browser" value="chrome"></parameter>
     <test name="Rest Assuranced">
         <classes>
             <class name="AutomationTest">
