@@ -26,7 +26,7 @@ pipeline {
             steps {
                 sh '''
                 cd load
-                export PATH=/Users/mfernandez/Documents/jmeter/apache-jmeter-5.2/bin:$PATH
+                export PATH=/home/pjcalvov/jmeter/apache-jmeter-5.3/bin:$PATH
                 jmeter -n -t LoadTesting.jmx
                 '''
             }
