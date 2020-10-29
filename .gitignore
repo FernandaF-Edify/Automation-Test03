@@ -1,0 +1,14 @@
+#IDE's
+.ideaDataSources/
+.idea
+.DS_Store
+*.iml
+*.ipr
+*.iws
+*.ids
+*.zip
+*.imscc
+logs
+target
+allure-results
+.allure
